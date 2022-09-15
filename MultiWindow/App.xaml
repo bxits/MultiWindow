@@ -1,0 +1,16 @@
+﻿<Application x:Class="MultiWindow.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MultiWindow"
+             xmlns:views="clr-namespace:MultiWindow.Views"
+             xmlns:viewmodels="clr-namespace:MultiWindow.ViewModels"
+             StartupUri="Views/MainView.xaml">
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+            <views:HomeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ListViewModel}">
+            <views:ListView/>
+        </DataTemplate>
+    </Application.Resources>
+</Application>
