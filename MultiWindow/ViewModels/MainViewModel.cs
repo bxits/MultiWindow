@@ -2,6 +2,7 @@
 using MultiWindow.Views;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,23 +11,29 @@ using System.Windows.Input;
 namespace MultiWindow.ViewModels
 {
 
-    class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
         ICommand _openChildViewCommand;
         BaseViewModel _currentViewModel = new HomeViewModel();
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public MainViewModel()
         {
-
+            UpdateViewCommand = new UpdateViewCommand(this);
         }
 
-        private ICommand UpdateViewCommand { get; set; }
+        public ICommand UpdateViewCommand { get; set; }
 
-        
-        public BaseViewModel SelectedViewModel
+
+        public BaseViewModel CurrentViewModel
         {
             get { return _currentViewModel; }
-            set { _currentViewModel = value; }
+            set
+            {
+                _currentViewModel = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentViewModel"));
+            }
         }
 
         public ICommand OpenChildViewCommand
@@ -40,8 +47,7 @@ namespace MultiWindow.ViewModels
             }
         }
 
-        public BaseViewModel CurrentViewModel { get => _currentViewModel; set => _currentViewModel = value; }
-
+      
         private void OpenChildView()
         {
             ChildView cv = new ChildView();

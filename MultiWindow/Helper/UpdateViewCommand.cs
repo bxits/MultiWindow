@@ -10,20 +10,25 @@ namespace MultiWindow.Helper
 {
     public class UpdateViewCommand : ICommand
     {
-        MainViewModel viewModel;
+        MainViewModel _viewModel;
         public event EventHandler CanExecuteChanged;
+
+        public UpdateViewCommand(MainViewModel mvm)
+        {
+            _viewModel = mvm;
+        }
 
         public bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void Execute(object parameter)
         {
             if (parameter.ToString() == "Home")
-                viewModel.SelectedViewModel = new HomeViewModel();
+                _viewModel.CurrentViewModel = new HomeViewModel();
             else if (parameter.ToString() == "List")
-                viewModel.SelectedViewModel = new ListViewModel();
+                _viewModel.CurrentViewModel = new ListViewModel();
         }
     }
 }

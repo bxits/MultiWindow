@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiWindow.ViewModels
 {
-    class BaseViewModel
+    public class BaseViewModel
     {
     }
 }
